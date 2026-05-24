@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+@import './fonts';
+@import './tokens';
+
+body {
+  font-family: 'PP Editorial New', sans-serif;
+}
+
+@layer components {
+  .display {
+    font-size: var(--font-size-display);
+    font-weight: var(--font-weight-ultralight);
+    line-height: var(--font-leading-tight);
+    letter-spacing: var(--font-tracking-tight);
+  }
+
+  .heading-1 {
+    font-size: var(--font-size-heading-1);
+    font-weight: var(--font-weight-ultralight);
+    line-height: var(--font-leading-tight);
+    letter-spacing: var(--font-tracking-tight);
+  }
+
+  .heading-2 {
+    font-size: var(--font-size-heading-2);
+    font-weight: var(--font-weight-ultralight);
+    line-height: var(--font-leading-tight);
+    letter-spacing: var(--font-tracking-tight);
+  }
+
+  .heading-3 {
+    font-size: var(--font-size-heading-3);
+    font-weight: var(--font-weight-thin);
+    line-height: var(--font-leading-snug);
+    letter-spacing: var(--font-tracking-tight);
+  }
+
+  .heading-4 {
+    font-size: var(--font-size-heading-4);
+    font-weight: var(--font-weight-thin);
+    line-height: var(--font-leading-snug);
+    letter-spacing: var(--font-tracking-normal);
+  }
+
+  .body-1 {
+    font-size: var(--font-size-body-1);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--font-leading-relaxed);
+    letter-spacing: var(--font-tracking-normal);
+  }
+
+  .body-2 {
+    font-size: var(--font-size-body-2);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--font-leading-relaxed);
+    letter-spacing: var(--font-tracking-normal);
+  }
+}

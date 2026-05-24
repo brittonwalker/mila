@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import WorkCard from '../../components/WorkCard.astro'
+import { client } from '../../lib/sanity'
+
+const works = await client.fetch(`*[_type == "work"] | order(_createdAt desc) {
+  title,
+  "slug": slug.current,
+  "coverImage": coverImage.asset->{ url, metadata { dimensions } }
+}`)
+---
+
+<Layout title="Work">
+  <main class="px-8 pt-40 pb-20">
+    <h1 class="display mb-16">Work</h1>
+    {works.length > 0 ? (
+      <ul id="work-grid" class="grid grid-cols-3 gap-x-8 gap-y-16">
+        {works.map((work: any) => (
+          <li class="work-item" style="opacity:0;transform:translateY(24px)">
+            <WorkCard {...work} />
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="body-1 text-[var(--color-semantic-text-muted)]">No work yet.</p>
+    )}
+
+<script>
+  import gsap from 'gsap'
+
+  gsap.to('.work-item', {
+    y: 0,
+    opacity: 1,
+    duration: 0.6,
+    stagger: 0.1,
+    ease: 'power3.out',
+    delay: 0.2,
+  })
+</script>
+  </main>
+</Layout>

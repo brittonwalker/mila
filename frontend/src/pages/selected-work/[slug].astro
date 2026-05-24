@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import PortableText from '../../components/PortableText.astro'
+import { client } from '../../lib/sanity'
+
+export async function getStaticPaths() {
+  const works = await client.fetch(`*[_type == "work" && defined(slug.current)]{ "slug": slug.current }`)
+  return works.map(({ slug }: { slug: string }) => ({ params: { slug } }))
+}
+
+const { slug } = Astro.params
+
+const work = await client.fetch(`*[_type == "work" && slug.current == $slug][0]{
+  title,
+  "seoTitle": seo.title,
+  content[]{
+    ...,
+    _type == "image" => {
+      "url": asset->url,
+      "dimensions": asset->metadata.dimensions,
+      alt,
+      caption
+    }
+  }
+}`, { slug })
+
+if (!work) return Astro.redirect('/selected-work')
+---
+
+<Layout title={work.seoTitle ?? work.title}>
+  <main class="px-8 pt-40 pb-20 max-w-3xl mx-auto">
+    <h1 class="display mb-16">{work.title}</h1>
+
+    {work.content?.map((block: any) => {
+      if (block._type === 'image') {
+        return (
+          <figure class="my-12">
+            <img
+              src={block.url}
+              alt={block.alt ?? ''}
+              class="w-full"
+              width={block.dimensions?.width}
+              height={block.dimensions?.height}
+            />
+            {block.caption && (
+              <figcaption class="body-2 text-[var(--color-semantic-text-muted)] mt-3">
+                {block.caption}
+              </figcaption>
+            )}
+          </figure>
+        )
+      }
+    })}
+
+    {work.content?.some((b: any) => b._type === 'block') && (
+      <PortableText value={work.content.filter((b: any) => b._type === 'block')} />
+    )}
+  </main>
+</Layout>

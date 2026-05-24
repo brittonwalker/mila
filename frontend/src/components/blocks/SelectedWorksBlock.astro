@@ -1,0 +1,96 @@
+---
+interface Work {
+  _id: string
+  title: string
+  slug: string
+  coverImage?: { url: string; dimensions?: { width: number; height: number } }
+}
+
+interface Props {
+  heading?: string
+  works?: Work[]
+}
+
+const { heading, works } = Astro.props
+---
+
+{works?.length ? (
+  <section
+    id="selected-works"
+    class="py-20"
+    style="--stack-offset: 64px; --stack-base: 20px;"
+  >
+    {heading && <h2 class="display px-8 mb-12">{heading}</h2>}
+    <div class="relative px-8" style="perspective: 900px;">
+      {works.map((work, i) => (
+        <a
+          href={`/selected-work/${work.slug}`}
+          class="work-card sticky block w-full overflow-hidden mb-6 last:mb-0 rounded-2xl"
+          style={`z-index: ${i + 1}; transform-origin: top center; top: calc(var(--stack-base) + ${i + 1} * var(--stack-offset));`}
+        >
+          <div class="bg-(--color-semantic-primary) w-full">
+            <div class="grid grid-cols-2 items-end gap-8 p-8">
+              <p class="heading-1 text-white">{work.title}</p>
+              {work.coverImage?.url ? (
+                <div class="aspect-4/3 overflow-hidden">
+                  <img
+                    src={work.coverImage.url}
+                    alt={work.title}
+                    class="w-full h-full object-cover rounded-xl"
+                    width={work.coverImage.dimensions?.width}
+                    height={work.coverImage.dimensions?.height}
+                  />
+                </div>
+              ) : (
+                <div class="aspect-4/3 bg-red-700" />
+              )}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+) : null}
+
+<script>
+  import gsap from 'gsap'
+  import ScrollTrigger from 'gsap/ScrollTrigger'
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  const section = document.getElementById('selected-works') as HTMLElement
+  const style = getComputedStyle(section)
+  const OFFSET = parseFloat(style.getPropertyValue('--stack-offset'))
+  const BASE_TOP = parseFloat(style.getPropertyValue('--stack-base'))
+  const SCALE_STEP = 0.06
+
+  const cards = gsap.utils.toArray<HTMLElement>('.work-card')
+  const total = cards.length
+
+  cards.forEach((card, i) => {
+    if (i === cards.length - 1) return
+
+    const scaleTo = 1 - (total - 1 - i) * SCALE_STEP
+
+    ScrollTrigger.create({
+      trigger: card,
+      start: `top top+=${BASE_TOP + i * OFFSET}`,
+      end: `+=${card.offsetHeight}`,
+      scrub: true,
+      onUpdate: (self) => {
+        const p = self.progress
+        const inner = card.querySelector<HTMLElement>('div')
+        gsap.set(card, {
+          rotateX: -5 * p,
+          scale: 1 - (1 - scaleTo) * p,
+        })
+        if (inner) {
+          const r = Math.round(230 + (201 - 230) * p)
+          const g = Math.round(48 + (112 - 48) * p)
+          const b = Math.round(48 + (112 - 48) * p)
+          inner.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
+        }
+      },
+    })
+  })
+</script>

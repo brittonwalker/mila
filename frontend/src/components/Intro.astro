@@ -1,0 +1,49 @@
+---
+---
+
+<div id="intro" class="fixed inset-0 z-50 flex items-center justify-center bg-[var(--color-semantic-primary)]" style="display:none">
+  <div id="intro-words" class="flex items-center gap-8 overflow-hidden">
+    <span class="intro-word heading-1 text-white" style="opacity:0;transform:translateY(40px)">Hola</span>
+    <span class="intro-word heading-1 text-white" style="opacity:0;transform:translateY(40px)">Hello</span>
+    <span class="intro-word heading-1 text-white" style="opacity:0;transform:translateY(40px)">Salut</span>
+    <span class="intro-word heading-1 text-white" style="opacity:0;transform:translateY(40px)">مرحبا</span>
+  </div>
+</div>
+
+<script>
+  import gsap from 'gsap'
+
+  const intro = document.getElementById('intro') as HTMLElement | null
+
+  if (!intro || sessionStorage.getItem('intro:seen')) {
+    intro?.remove()
+    window.dispatchEvent(new Event('intro:reveal'))
+    window.dispatchEvent(new Event('intro:done'))
+  } else {
+    intro.style.display = ''
+    const tl = gsap.timeline()
+
+    tl.to('.intro-word', {
+      y: 0,
+      opacity: 1,
+      duration: 0.5,
+      delay: 0.5,
+      stagger: 0.18,
+      ease: 'power3.out',
+    })
+    .to('.intro-word', {
+      duration: 0.6,
+    })
+    .to('#intro', {
+      yPercent: -100,
+      duration: 0.9,
+      ease: 'power4.inOut',
+      onStart: () => window.dispatchEvent(new Event('intro:reveal')),
+      onComplete: () => {
+        intro.remove()
+        sessionStorage.setItem('intro:seen', '1')
+        window.dispatchEvent(new Event('intro:done'))
+      },
+    })
+  }
+</script>

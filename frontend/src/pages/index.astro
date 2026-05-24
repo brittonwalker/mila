@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro'
+import HeroBlock from '../components/blocks/HeroBlock.astro'
+import SelectedWorksBlock from '../components/blocks/SelectedWorksBlock.astro'
+import Intro from '../components/Intro.astro'
+import { client } from '../lib/sanity'
+
+const homepage = await client.fetch(`*[_type == "homepage"][0]{
+  "title": seo.title,
+  blocks[]{
+    _type,
+    _key,
+    body,
+    "image": image.asset->{ url, metadata { dimensions } },
+    heading,
+    works[]->{
+      _id,
+      title,
+      "slug": slug.current,
+      "coverImage": coverImage.asset->{ url, metadata { dimensions } }
+    }
+  }
+}`)
+
+const { title, blocks } = homepage ?? {}
+---
+
+<Layout title={title ?? 'Mila Linares'}>
+  <Intro />
+  <main>
+    {blocks?.map((block: any) => {
+      if (block._type === 'heroBlock') {
+        return <HeroBlock {...block} />
+      }
+      if (block._type === 'selectedWorksBlock') {
+        return <SelectedWorksBlock {...block} />
+      }
+    })}
+  </main>
+</Layout>

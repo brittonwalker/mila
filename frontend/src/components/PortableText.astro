@@ -1,0 +1,40 @@
+---
+import { toHTML } from '@portabletext/to-html'
+
+interface Props {
+  value: any[]
+  class?: string
+  normalClass?: string
+}
+
+const { value, class: className, normalClass = 'body-1' } = Astro.props
+
+const html = toHTML(value, {
+  components: {
+    block: {
+      normal: ({ children }) => `<p class="${normalClass} mb-4 last:mb-0">${children}</p>`,
+      h1: ({ children }) => `<h1 class="heading-1 mb-6">${children}</h1>`,
+      h2: ({ children }) => `<h2 class="heading-2 mb-5">${children}</h2>`,
+      h3: ({ children }) => `<h3 class="heading-3 mb-4">${children}</h3>`,
+      h4: ({ children }) => `<h4 class="heading-4 mb-3">${children}</h4>`,
+      blockquote: ({ children }) => `<blockquote class="body-1 italic border-l-2 border-current pl-6 my-6">${children}</blockquote>`,
+    },
+    list: {
+      bullet: ({ children }) => `<ul class="body-1 list-disc pl-6 mb-4 space-y-1">${children}</ul>`,
+      number: ({ children }) => `<ol class="body-1 list-decimal pl-6 mb-4 space-y-1">${children}</ol>`,
+    },
+    listItem: {
+      bullet: ({ children }) => `<li>${children}</li>`,
+      number: ({ children }) => `<li>${children}</li>`,
+    },
+    marks: {
+      strong: ({ children }) => `<strong class="font-bold">${children}</strong>`,
+      em: ({ children }) => `<em class="italic">${children}</em>`,
+      underline: ({ children }) => `<span class="underline underline-offset-4">${children}</span>`,
+      link: ({ children, value }) => `<a href="${value.href}" class="underline underline-offset-4 hover:opacity-60 transition-opacity">${children}</a>`,
+    },
+  },
+})
+---
+
+<div class={className} set:html={html} />

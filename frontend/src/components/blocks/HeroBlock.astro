@@ -1,0 +1,63 @@
+---
+import PortableText from '../PortableText.astro'
+
+interface Props {
+  body?: any[]
+  image?: { url: string; dimensions?: { width: number; height: number } }
+}
+
+const { body, image } = Astro.props
+---
+
+<section class="grid grid-cols-2 gap-20 px-8 min-h-svh items-center pt-20">
+  <div class="flex flex-col justify-center items-center">
+    <div id="hero-text" class="max-w-145" style="opacity:0;transform:translateY(32px)">
+    {body && <PortableText value={body} normalClass="text-2xl" />}
+    </div>
+  </div>
+
+  <div class="flex flex-col justify-center items-center">
+  <div class="w-full max-w-[490px] max-h-svh overflow-hidden">
+    <div id="hero-image" style="opacity:0;transform:translateY(24px)">
+    {image?.url ? (
+      <img
+        src={image.url}
+        alt=""
+        class="w-full h-full object-cover"
+        width={image.dimensions?.width}
+        height={image.dimensions?.height}
+      />
+    ) : (
+      <div class="w-full h-full bg-neutral-100" />
+    )}
+    </div>
+  </div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap'
+
+  const animate = () => {
+    gsap.to('#hero-text', {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      delay: 0.35,
+      ease: 'power3.out',
+    })
+    gsap.to('#hero-image', {
+      opacity: 1,
+      y: 0,
+      duration: 1.1,
+      delay: 0.5,
+      ease: 'power3.out',
+    })
+  }
+
+  if (document.getElementById('intro')) {
+    window.addEventListener('intro:reveal', animate, { once: true })
+  } else {
+    animate()
+  }
+</script>

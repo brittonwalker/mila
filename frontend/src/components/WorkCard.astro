@@ -1,0 +1,26 @@
+---
+interface Props {
+  title: string
+  slug: string
+  coverImage?: { url: string; dimensions?: { width: number; height: number } }
+}
+
+const { title, slug, coverImage } = Astro.props
+---
+
+<a href={`/selected-work/${slug}`} class="group block">
+  <div class="aspect-square w-full overflow-hidden bg-neutral-100 mb-4">
+    {coverImage?.url ? (
+      <img
+        src={coverImage.url}
+        alt={title}
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        width={coverImage.dimensions?.width}
+        height={coverImage.dimensions?.height}
+      />
+    ) : (
+      <div class="w-full h-full bg-neutral-100" />
+    )}
+  </div>
+  <p class="heading-4 transition-opacity group-hover:opacity-60">{title}</p>
+</a>

@@ -1,0 +1,30 @@
+---
+const year = new Date().getFullYear()
+
+const socials = [
+  { label: 'Instagram', href: '#' },
+  { label: 'LinkedIn', href: '#' },
+  { label: 'Twitter', href: '#' },
+]
+---
+
+<footer id="site-footer" class="bg-brand text-white fixed bottom-0 left-0 w-full min-h-[50svh] flex flex-col justify-between px-8 pt-12 pb-6 bg-(--color-semantic-background) z-0">
+  <p class="text-[10vw] mb-24">Let's work together.</p>
+
+  <div class="flex items-end justify-between">
+    <p class="body-2">© {year} Mila Linares</p>
+
+    <ul class="flex gap-8">
+      {socials.map(({ label, href }) => (
+        <li>
+          <a href={href} class="body-2 hover:opacity-60 transition-opacity">{label}</a>
+        </li>
+      ))}
+      <li>
+        <a href="mailto:hello@milalinares.com" class="body-2 hover:opacity-60 transition-opacity">
+          hello@milalinares.com
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>
