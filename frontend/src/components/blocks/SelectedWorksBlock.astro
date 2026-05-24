@@ -20,8 +20,8 @@ const { heading, works } = Astro.props
     class="py-20"
     style="--stack-offset: 64px; --stack-base: 20px;"
   >
-    {heading && <h2 class="display px-8 mb-12">{heading}</h2>}
-    <div class="relative px-8" style="perspective: 900px;">
+    {heading && <h2 class="display px-4 lg:px-8 mb-12">{heading}</h2>}
+    <div class="relative px-4 lg:px-8" style="perspective: 900px;">
       {works.map((work, i) => (
         <a
           href={`/selected-work/${work.slug}`}
@@ -29,17 +29,21 @@ const { heading, works } = Astro.props
           style={`z-index: ${i + 1}; transform-origin: top center; top: calc(var(--stack-base) + ${i + 1} * var(--stack-offset));`}
         >
           <div class="bg-(--color-semantic-primary) w-full">
-            <div class="grid grid-cols-2 items-end gap-8 p-8">
+            <div class="grid grid-cols-2 gap-8 p-8">
               <p class="heading-1 text-white">{work.title}</p>
               {work.coverImage?.url ? (
-                <div class="aspect-4/3 overflow-hidden">
-                  <img
-                    src={work.coverImage.url}
-                    alt={work.title}
-                    class="w-full h-full object-cover rounded-xl"
-                    width={work.coverImage.dimensions?.width}
-                    height={work.coverImage.dimensions?.height}
-                  />
+                <div>
+                  <div class="w-3/4 ml-auto">
+                    <div class="aspect-4/3 overflow-hidden">
+                      <img
+                        src={work.coverImage.url}
+                        alt={work.title}
+                        class="w-full h-full object-cover rounded-xl"
+                        width={work.coverImage.dimensions?.width}
+                        height={work.coverImage.dimensions?.height}
+                      />
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <div class="aspect-4/3 bg-red-700" />
