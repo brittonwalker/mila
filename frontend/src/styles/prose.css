@@ -1,0 +1,139 @@
+.prose {
+  max-width: 100%;
+  position: relative;
+
+  > * {
+    margin-top: 1em;
+  }
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  h2 {
+    font-size: var(--font-size-heading-1);
+    font-weight: var(--font-weight-ultralight);
+    line-height: var(--font-leading-tight);
+    letter-spacing: var(--font-tracking-tight);
+  }
+
+  h3 {
+    font-size: var(--font-size-heading-2);
+    font-weight: var(--font-weight-ultralight);
+    line-height: var(--font-leading-tight);
+    letter-spacing: var(--font-tracking-tight);
+  }
+
+  h4 {
+    font-size: var(--font-size-heading-3);
+    font-weight: var(--font-weight-thin);
+    line-height: var(--font-leading-snug);
+    letter-spacing: var(--font-tracking-tight);
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: 1.5em;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 1.5em;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  blockquote {
+    border-left: 1px solid var(--border-subtle);
+    padding-left: 1em;
+    color: var(--foreground);
+    font-style: italic;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border-subtle);
+    margin: 2em 0;
+  }
+}
+
+.prose--article {
+  --gap: 8px;
+  --cols: 12;
+  --span: 12;
+  --col-width: calc((100% - ((var(--cols) - 1) * var(--gap))) / var(--cols));
+  --article-width: calc(
+    (var(--col-width) * var(--span)) + ((var(--span) - 1) * var(--gap))
+  );
+  --width-max: 980px;
+
+  @media (min-width: 768px) {
+    --span: 10;
+  }
+
+  @media (min-width: 1024px) {
+    --span: 8;
+  }
+
+  @media (min-width: 1280px) {
+    --span: 6;
+  }
+
+  margin-inline: auto;
+
+  > * {
+    margin-inline: auto;
+    width: var(--article-width);
+    max-width: var(--width-max);
+  }
+
+  [data-component='code'] {
+    margin-top: 3rem;
+  }
+
+  [data-component='image'] {
+    margin-top: 10rem;
+  }
+
+  [data-component='gallery'] {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 4rem;
+  }
+
+  [data-component='video'] {
+    width: 100%;
+    max-width: var(--article-width);
+    margin-top: 10rem;
+  }
+}
+
+.prose--default {
+  --gap: 8px;
+  --cols: 12;
+  --span: 12;
+  --col-width: calc((100% - ((var(--cols) - 1) * var(--gap))) / var(--cols));
+  --article-width: calc(
+    (var(--col-width) * var(--span)) + ((var(--span) - 1) * var(--gap))
+  );
+  --width-max: 980px;
+
+  > * {
+    width: var(--article-width);
+    max-width: var(--width-max);
+  }
+
+  @media (min-width: 768px) {
+    --span: 10;
+  }
+
+  @media (min-width: 1024px) {
+    --span: 8;
+  }
+
+  @media (min-width: 1280px) {
+    --span: 6;
+  }
+}

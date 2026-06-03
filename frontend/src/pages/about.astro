@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro'
+import PortableText from '../components/PortableText.astro'
+import { client } from '../lib/sanity'
+
+const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{
+  heading,
+  skills,
+  "seoTitle": seo.title,
+  "image": image.asset->{ url, metadata { dimensions } },
+  content[]{
+    ...,
+    _type == "image" => {
+      "url": asset->url,
+      "dimensions": asset->metadata.dimensions,
+      alt,
+      caption
+    }
+  }
+}`)
+---
+
+<Layout title={about?.seoTitle ?? about?.heading ?? 'About'}>
+  <main class="px-8 pt-40 pb-20 mx-auto">
+    {about?.heading && <h1 class="display mb-8">{about.heading}</h1>}
+    <div class="grid grid-cols-12 gap-4">
+
+      <div class="col-span-6">
+        {about?.content?.length > 0 && (
+          <div>
+            {about.content?.some((b: any) => b._type === 'block') && (
+          <PortableText value={about.content.filter((b: any) => b._type === 'block')} layout={false} />
+        )}
+          </div>
+        )}
+      </div>
+
+      <div class="col-start-8 col-span-4 flex flex-col gap-12">
+        {about?.image?.url && (
+          <img
+            src={about.image.url}
+            alt={about.heading ?? ''}
+            class="w-full"
+            width={about.image.metadata?.dimensions?.width}
+            height={about.image.metadata?.dimensions?.height}
+          />
+        )}
+        {about?.skills?.length > 0 && (
+          <div class="flex flex-wrap gap-2">
+            {about.skills.map((skill: string) => (
+              <span class="body-2 border border-current px-3 py-1">{skill}</span>
+            ))}
+          </div>
+        )}
+      </div>
+
+    </div>
+  </main>
+</Layout>

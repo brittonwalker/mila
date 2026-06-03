@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import './fonts';
 @import './tokens';
+@import './prose';
 
 body {
   font-family: 'PP Editorial New', sans-serif;

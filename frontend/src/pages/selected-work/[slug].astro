@@ -13,6 +13,13 @@ const { slug } = Astro.params
 const work = await client.fetch(`*[_type == "work" && slug.current == $slug][0]{
   title,
   "seoTitle": seo.title,
+  credits[]{role, names},
+  projectImages[]{
+    "url": asset->url,
+    "dimensions": asset->metadata.dimensions,
+    alt,
+    caption
+  },
   content[]{
     ...,
     _type == "image" => {
@@ -28,32 +35,55 @@ if (!work) return Astro.redirect('/selected-work')
 ---
 
 <Layout title={work.seoTitle ?? work.title}>
-  <main class="px-8 pt-40 pb-20 max-w-3xl mx-auto">
-    <h1 class="display mb-16">{work.title}</h1>
+  <main class="px-4 lg:px-8 pt-40 pb-20 mx-auto">
+    <div class="lg:grid grid-cols-12">
+      <div class="col-span-7">
+        <h1 class="display mb-16">{work.title}</h1>
+      </div>
+    </div>
 
-    {work.content?.map((block: any) => {
-      if (block._type === 'image') {
-        return (
-          <figure class="my-12">
+    <div class="lg:grid grid-cols-12 gap-8">
+      <div class="col-span-12">
+        {work.credits?.length > 0 && (
+          <dl class="flex flex-col gap-1 mb-8">
+            {work.credits.map(({ role, names }: { role: string; names: string }) => (
+              <div class="flex gap-4">
+                <dt class="body-2 text-[var(--color-semantic-text-muted)] shrink-0">{role}:</dt>
+                <dd class="body-2">{names}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+      </div>
+      <div class="col-span-5">
+        {work.content?.some((b: any) => b._type === 'block') && (
+          <PortableText value={work.content.filter((b: any) => b._type === 'block')} layout={false} />
+        )}
+      </div>
+      <div class="col-start-7 col-span-6">
+            {work.projectImages?.length > 0 && (
+      <div class="flex flex-col gap-4 mb-16">
+        {work.projectImages.map((img: any) => (
+          <figure>
             <img
-              src={block.url}
-              alt={block.alt ?? ''}
+              src={img.url}
+              alt={img.alt ?? ''}
               class="w-full"
-              width={block.dimensions?.width}
-              height={block.dimensions?.height}
+              width={img.dimensions?.width}
+              height={img.dimensions?.height}
             />
-            {block.caption && (
+            {img.caption && (
               <figcaption class="body-2 text-[var(--color-semantic-text-muted)] mt-3">
-                {block.caption}
+                {img.caption}
               </figcaption>
             )}
           </figure>
-        )
-      }
-    })}
-
-    {work.content?.some((b: any) => b._type === 'block') && (
-      <PortableText value={work.content.filter((b: any) => b._type === 'block')} />
+        ))}
+      </div>
     )}
+      </div>
+
+    </div>
+
   </main>
 </Layout>

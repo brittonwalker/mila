@@ -10,13 +10,13 @@ const { body, image } = Astro.props
 ---
 
 <section class="grid lg:grid-cols-2 gap-20 px-4 lg:px-8 min-h-svh items-center pt-20">
-  <div class="flex flex-col justify-center items-center">
+  <div class="order-last lg:order-first flex flex-col justify-center items-center">
     <div id="hero-text" class="max-w-145" style="opacity:0;transform:translateY(32px)">
-    {body && <PortableText value={body} normalClass="text-2xl" />}
+    {body && <PortableText value={body} layout={false} normalClass="text-2xl" />}
     </div>
   </div>
 
-  <div class="flex flex-col justify-center items-center">
+  <div class="order-first lg:order-last flex flex-col justify-center items-center">
   <div class="w-full max-w-[490px] max-h-svh overflow-hidden">
     <div id="hero-image" style="opacity:0;transform:translateY(24px)">
     {image?.url ? (

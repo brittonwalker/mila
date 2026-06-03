@@ -3,7 +3,7 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 
-const SINGLETONS = new Set(['homepage', 'navigation'])
+const SINGLETONS = new Set(['homepage', 'about', 'navigation'])
 
 export default defineConfig({
   name: 'default',
@@ -22,6 +22,10 @@ export default defineConfig({
               .title('Homepage')
               .id('homepage')
               .child(S.document().schemaType('homepage').documentId('homepage')),
+            S.listItem()
+              .title('About')
+              .id('about')
+              .child(S.document().schemaType('about').documentId('about')),
             S.listItem()
               .title('Navigation')
               .id('navigation')

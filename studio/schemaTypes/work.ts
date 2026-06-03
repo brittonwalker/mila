@@ -59,6 +59,58 @@ export const work = defineType({
       group: 'content',
     }),
     defineField({
+      name: 'projectImages',
+      title: 'Project Images',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: {hotspot: true},
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Alt text',
+              type: 'string',
+            }),
+            defineField({
+              name: 'caption',
+              title: 'Caption',
+              type: 'string',
+            }),
+          ],
+        },
+      ],
+      options: {layout: 'grid'},
+      group: 'content',
+    }),
+    defineField({
+      name: 'credits',
+      title: 'Credits',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'role',
+              title: 'Role',
+              type: 'string',
+              placeholder: 'e.g. Team, Strategy, Design',
+            }),
+            defineField({
+              name: 'names',
+              title: 'Names',
+              type: 'string',
+            }),
+          ],
+          preview: {
+            select: {title: 'role', subtitle: 'names'},
+          },
+        },
+      ],
+      group: 'content',
+    }),
+    defineField({
       name: 'seo',
       title: 'SEO',
       type: 'seo',
