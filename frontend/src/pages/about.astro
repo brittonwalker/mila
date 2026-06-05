@@ -21,19 +21,24 @@ const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{
 ---
 
 <Layout title={about?.seoTitle ?? about?.heading ?? 'About'}>
-  <main class="pt-40 pb-20 mx-auto">
+  <main class="pt-40 pb-40 mx-auto">
     <div class="grid grid-cols-8 gap-4">
       <div class="col-span-3">
         {about?.heading && <h1 class="body-2 mb-8 leading-[150%]">{about.heading}</h1>}
       </div>
-      <div class="col-span-5 prose body-2 leading-[150%]">
-        <p>Hi, I'm Mila.</p>
+      <div class="col-span-5 ">
+        <div class="prose body-2 leading-[150%]">
+        <p>Hola, I'm Mila.</p>
         <p>I'm a strategist who believes the best work sits at the intersection of bold vision and rigorous thinking. I help brands find their footing — whether that means shaping a long-term strategy, building the story from the ground up, or activating ideas that move people.</p>
         <p>I've led strategy across brand, marketing, and social impact — working with global organizations to drive growth, build culture, and create meaningful change. My practice spans Vision & Long-Term Strategy, Brand Storytelling, Integrated Marketing, and Community Engagement, with a deep commitment to responsible business and social impact.</p>
         <p>I work best in the space between complexity and clarity — where the brief is hard, the stakes are real, and the answer isn't obvious yet.</p>
+        </div>
+        <div class="mt-12">
+          <a href="#" class="btn btn-secondary no-underline body-2">View My Resume</a>
+        </div>
       </div>
     </div>
-    <div class="grid grid-cols-8 gap-4 mt-40">
+    <!-- <div class="grid grid-cols-8 gap-4 mt-40">
       <div class="col-span-3">
         {about?.heading && <h2 class="body-2 mb-8 leading-[150%]">Curiculum Verite</h2>}
       </div>
@@ -46,6 +51,6 @@ const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{
           </div>
         )}
       </div>
-    </div>
+    </div> -->
   </main>
 </Layout>

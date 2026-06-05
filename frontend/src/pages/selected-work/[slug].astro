@@ -36,9 +36,9 @@ if (!work) return Astro.redirect('/selected-work')
 
 <Layout title={work.seoTitle ?? work.title}>
   <main class="pt-40 pb-20 mx-auto">
-    <div class="lg:grid grid-cols-12">
+    <div class="lg:grid grid-cols-12 border-b border-brand pb-10 mb-16">
       <div class="col-span-7">
-        <h1 class="display mb-16">{work.title}</h1>
+        <h1 class="display">{work.title}</h1>
       </div>
     </div>
 
@@ -61,6 +61,8 @@ if (!work) return Astro.redirect('/selected-work')
             <PortableText value={work.content.filter((b: any) => b._type === 'block')} layout={false} normalClass='body-1' />
           )}
         </div>
+      </div>
+      <div class="col-span-12">
         {work.projectImages?.length > 0 && (
           <div class="flex flex-col gap-4 mb-16">
             {work.projectImages.map((img: any) => (

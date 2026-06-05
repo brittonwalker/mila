@@ -69,9 +69,6 @@ body {
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.75rem;
-    font-size: var(--font-size-body-1);
-    font-weight: var(--font-weight-regular);
-    letter-spacing: var(--font-tracking-wide);
     line-height: 1;
     transition: transform 0.2s ease;
     cursor: pointer;
@@ -90,7 +87,7 @@ body {
 
   .btn-secondary {
     background-color: transparent;
-    color: var(--color-semantic-text);
+    color: var(--color-brand);
   }
 }
 
