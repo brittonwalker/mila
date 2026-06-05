@@ -56,4 +56,47 @@ body {
     line-height: var(--font-leading-relaxed);
     letter-spacing: var(--font-tracking-normal);
   }
+
+  .label {
+    font-size: var(--font-size-label);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--font-leading-relaxed);
+    letter-spacing: var(--font-tracking-normal);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    font-size: var(--font-size-body-1);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--font-tracking-wide);
+    line-height: 1;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    border: 1px solid var(--color-brand);
+    border-radius: 9999px;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    background-color: var(--color-semantic-primary);
+    color: var(--color-neutral-0);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-semantic-text);
+  }
+}
+
+.container {
+  max-width: 1800px;
+  width: calc(100% - 2rem);
+  margin-left: auto;
+  margin-right: auto;
 }

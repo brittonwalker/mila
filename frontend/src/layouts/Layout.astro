@@ -23,21 +23,14 @@ const { title } = Astro.props
   <body>
     <div id="page-content" class="relative z-10 bg-(--color-semantic-background)">
       <Header />
+      <div class="container">
       <slot />
+      </div>
     </div>
     <Footer />
   </body>
   <script>
     import Lenis from 'lenis'
-
-    const footer = document.getElementById('site-footer') as HTMLElement
-    const pageContent = document.getElementById('page-content') as HTMLElement
-
-    const syncMargin = () => {
-      pageContent.style.marginBottom = `${footer.offsetHeight}px`
-    }
-    syncMargin()
-    window.addEventListener('resize', syncMargin)
 
     const header = document.getElementById('site-header') as HTMLElement
     let lastScroll = 0

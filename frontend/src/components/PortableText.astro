@@ -42,6 +42,7 @@ const html = toHTML(value, {
 <div class={clsx('prose', className, {
   'prose--default': layout === 'default',
   'prose--article': layout === 'article',
-  'body-2': layout === 'article',
+  'body-1': layout === 'article',
+  'tktk': layout === 'article',
   [normalClass]: true,
 })} set:html={html} />

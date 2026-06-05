@@ -11,8 +11,8 @@ const works = await client.fetch(`*[_type == "work"] | order(_createdAt desc) {
 ---
 
 <Layout title="Work">
-  <main class="px-8 pt-40 pb-20">
-    <h1 class="display mb-16">Work</h1>
+  <main class="pt-40 pb-20">
+    <h1 class="display mb-16">Selected Work</h1>
     {works.length > 0 ? (
       <ul id="work-grid" class="grid grid-cols-3 gap-x-8 gap-y-16">
         {works.map((work: any) => (

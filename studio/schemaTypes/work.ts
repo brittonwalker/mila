@@ -25,6 +25,12 @@ export const work = defineType({
       group: 'content',
     }),
     defineField({
+      name: 'role',
+      title: 'Role',
+      type: 'string',
+      group: 'content',
+    }),
+    defineField({
       name: 'coverImage',
       title: 'Cover Image',
       type: 'image',

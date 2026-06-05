@@ -29,6 +29,8 @@
     font-weight: var(--font-weight-thin);
     line-height: var(--font-leading-snug);
     letter-spacing: var(--font-tracking-tight);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
   }
 
   ol {

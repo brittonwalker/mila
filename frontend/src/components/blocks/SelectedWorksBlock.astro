@@ -20,8 +20,8 @@ const { heading, works } = Astro.props
     class="py-20"
     style="--stack-offset: 64px; --stack-base: 20px;"
   >
-    {heading && <h2 class="display px-4 lg:px-8 mb-12">{heading}</h2>}
-    <div class="relative px-4 lg:px-8" style="perspective: 900px;">
+    {heading && <h2 class="display mb-12">{heading}</h2>}
+    <div class="relative" style="perspective: 900px;">
       {works.map((work, i) => (
         <a
           href={`/selected-work/${work.slug}`}
@@ -52,6 +52,9 @@ const { heading, works } = Astro.props
           </div>
         </a>
       ))}
+    </div>
+    <div class="mt-12">
+      <a href="/selected-work" class="btn btn-primary">See all work</a>
     </div>
   </section>
 ) : null}

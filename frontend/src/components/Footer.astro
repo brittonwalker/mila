@@ -8,23 +8,25 @@ const socials = [
 ]
 ---
 
-<footer id="site-footer" class="bg-brand text-white fixed bottom-0 left-0 w-full min-h-[50svh] flex flex-col justify-between px-4 lg:px-8 pt-12 pb-6 bg-(--color-semantic-background) z-0">
-  <p class="text-[10vw] mb-24">Let's work together.</p>
+<footer id="site-footer" class="w-full pt-12 pb-[4vw] bg-(--color-semantic-background) z-0">
+  <div class="container">
+    <p class="text-[clamp(3rem,6vw,6vw)] mb-8 lg:mb-24 leading-[120%]">Let's work together.</p>
 
-  <div class="flex items-end justify-between">
-    <p class="body-2">© {year} Mila Linares</p>
+    <div class="flex flex-col lg:flex-row justify-between border-t border-brand pt-6 label gap-8">
+      <p class="order-last lg:order-[unset]">© {year} Mila Linares</p>
 
-    <ul class="flex gap-8">
-      {socials.map(({ label, href }) => (
+      <ul class="order-first lg:order-[unset] flex flex-col lg:flex-row gap-2 lg:gap-8">
+        {socials.map(({ label, href }) => (
+          <li>
+            <a href={href} class="hover:opacity-60 transition-opacity">{label}</a>
+          </li>
+        ))}
         <li>
-          <a href={href} class="body-2 hover:opacity-60 transition-opacity">{label}</a>
+          <a href="mailto:hello@milalinares.com" class="hover:opacity-60 transition-opacity">
+            hello@milalinares.com
+          </a>
         </li>
-      ))}
-      <li>
-        <a href="mailto:hello@milalinares.com" class="body-2 hover:opacity-60 transition-opacity">
-          hello@milalinares.com
-        </a>
-      </li>
-    </ul>
+      </ul>
+    </div>
   </div>
 </footer>
