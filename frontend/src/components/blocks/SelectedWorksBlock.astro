@@ -17,10 +17,9 @@ const { heading, works } = Astro.props
 {works?.length ? (
   <section
     id="selected-works"
-    class="py-20"
     style="--stack-offset: 64px; --stack-base: 20px;"
   >
-    {heading && <h2 class="display mb-12">{heading}</h2>}
+    {heading && <h2 class="heading-5 pt-6 border-t-brand border-t mb-12">{heading}</h2>}
     <div class="relative" style="perspective: 900px;">
       {works.map((work, i) => (
         <a

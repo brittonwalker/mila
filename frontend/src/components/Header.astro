@@ -1,7 +1,9 @@
 ---
-import { client } from '../lib/sanity'
+import { Eye, EyeClosed } from "@lucide/astro";
+import { client } from "../lib/sanity";
 
-const nav = await client.fetch(`*[_type == "navigation" && _id == "navigation"][0]{
+const nav =
+  await client.fetch(`*[_type == "navigation" && _id == "navigation"][0]{
   links[]{
     label,
     linkType,
@@ -10,84 +12,133 @@ const nav = await client.fetch(`*[_type == "navigation" && _id == "navigation"][
       linkType == "custom" => url
     )
   }
-}`)
+}`);
 
-const links = nav?.links ?? []
+const links = nav?.links ?? [];
 ---
 
-<header id="site-header" class="fixed top-0 left-0 w-full py-4 transition-transform duration-300 ease-in-out z-50">
+<header
+  id="site-header"
+  class="fixed top-0 left-0 w-full py-4 transition-transform duration-300 ease-in-out z-50"
+>
   <div class="container flex items-center justify-between">
-    <a href="/" class="text-brand text-[36px] font-normal tracking-tight">Mila Linares</a>
+    <a href="/">Mila Linares</a>
 
-    {links.length > 0 && (
-      <nav class="hidden lg:block">
-        <ul class="text-[18px] flex gap-8">
-          <li>
-            <a href="/about" class="hover:opacity-60 transition-opacity">About</a>
-          </li>
-          {links.map(({ label, href }: { label: string; href: string }) => (
+    {
+      links.length > 0 && (
+        <nav class="hidden lg:block">
+          <ul class="flex items-center gap-6">
             <li>
-              <a href={href} class="hover:opacity-60 transition-opacity">{label}</a>
+              <button
+                id="grid-toggle"
+                class="hidden lg:flex items-center p-2 hover:opacity-60 transition-opacity cursor-pointer"
+                aria-label="Toggle grid overlay"
+                aria-pressed="false"
+              >
+                <Eye id="grid-icon-eye" size={18} />
+                <EyeClosed id="grid-icon-eye-closed" size={18} class="hidden" />
+              </button>
             </li>
-          ))}
-        </ul>
-      </nav>
-    )}
+            <li>
+              <a href="/about" class="hover:opacity-60 transition-opacity">
+                About
+              </a>
+            </li>
+            {links.map(({ label, href }: { label: string; href: string }) => (
+              <li>
+                <a href={href} class="hover:opacity-60 transition-opacity">
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
 
-    <button id="menu-toggle" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Open menu" aria-expanded="false">
-      <span class="menu-bar block w-6 h-px bg-(--color-semantic-text) transition-all duration-300 origin-center"></span>
-      <span class="menu-bar block w-6 h-px bg-(--color-semantic-text) transition-all duration-300 origin-center"></span>
+    <button
+      id="menu-toggle"
+      class="lg:hidden flex flex-col gap-1.5 p-2"
+      aria-label="Open menu"
+      aria-expanded="false"
+    >
+      <span
+        class="menu-bar block w-6 h-px bg-(--color-semantic-text) transition-all duration-300 origin-center"
+      ></span>
+      <span
+        class="menu-bar block w-6 h-px bg-(--color-semantic-text) transition-all duration-300 origin-center"
+      ></span>
     </button>
   </div>
 </header>
 
 <div id="mobile-nav" class="fixed inset-0 z-40 pointer-events-none">
-  <div id="nav-backdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300"></div>
-  <nav id="nav-drawer" class="absolute top-0 left-0 h-full w-4/5 max-w-sm bg-(--color-semantic-background) flex flex-col justify-between py-24 transition-transform duration-300 ease-in-out" style="transform:translateX(-100%)">
+  <div
+    id="nav-backdrop"
+    class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300"
+  >
+  </div>
+  <nav
+    id="nav-drawer"
+    class="absolute top-0 left-0 h-full w-4/5 max-w-sm bg-(--color-semantic-background) flex flex-col justify-between py-24 transition-transform duration-300 ease-in-out"
+    style="transform:translateX(-100%)"
+  >
     <div class="container flex flex-col justify-between h-full">
       <ul class="flex flex-col gap-8">
         <li>
-          <a href="/about" class="heading-2 hover:opacity-60 transition-opacity">About</a>
+          <a href="/about" class="heading-2 hover:opacity-60 transition-opacity"
+            >About</a
+          >
         </li>
-        {links.map(({ label, href }: { label: string; href: string }) => (
-          <li>
-            <a href={href} class="heading-2 hover:opacity-60 transition-opacity">{label}</a>
-          </li>
-        ))}
+        {
+          links.map(({ label, href }: { label: string; href: string }) => (
+            <li>
+              <a
+                href={href}
+                class="heading-2 hover:opacity-60 transition-opacity"
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </nav>
 </div>
 
 <script>
-  const toggle = document.getElementById('menu-toggle') as HTMLElement
-  const drawer = document.getElementById('nav-drawer') as HTMLElement
-  const backdrop = document.getElementById('nav-backdrop') as HTMLElement
-  const mobileNav = document.getElementById('mobile-nav') as HTMLElement
-  const bars = toggle.querySelectorAll<HTMLElement>('.menu-bar')
+  const toggle = document.getElementById("menu-toggle") as HTMLElement;
+  const drawer = document.getElementById("nav-drawer") as HTMLElement;
+  const backdrop = document.getElementById("nav-backdrop") as HTMLElement;
+  const mobileNav = document.getElementById("mobile-nav") as HTMLElement;
+  const bars = toggle.querySelectorAll<HTMLElement>(".menu-bar");
 
-  let open = false
+  let open = false;
 
   const setOpen = (value: boolean) => {
-    open = value
-    toggle.setAttribute('aria-expanded', String(open))
+    open = value;
+    toggle.setAttribute("aria-expanded", String(open));
 
     if (open) {
-      mobileNav.style.pointerEvents = 'all'
-      backdrop.style.opacity = '1'
-      drawer.style.transform = 'translateX(0)'
-      bars[0].style.transform = 'translateY(4px) rotate(45deg)'
-      bars[1].style.transform = 'translateY(-4px) rotate(-45deg)'
+      mobileNav.style.pointerEvents = "all";
+      backdrop.style.opacity = "1";
+      drawer.style.transform = "translateX(0)";
+      bars[0].style.transform = "translateY(4px) rotate(45deg)";
+      bars[1].style.transform = "translateY(-4px) rotate(-45deg)";
     } else {
-      mobileNav.style.pointerEvents = 'none'
-      backdrop.style.opacity = '0'
-      drawer.style.transform = 'translateX(-100%)'
-      bars[0].style.transform = ''
-      bars[1].style.transform = ''
+      mobileNav.style.pointerEvents = "none";
+      backdrop.style.opacity = "0";
+      drawer.style.transform = "translateX(-100%)";
+      bars[0].style.transform = "";
+      bars[1].style.transform = "";
     }
-  }
+  };
 
-  toggle.addEventListener('click', () => setOpen(!open))
-  backdrop.addEventListener('click', () => setOpen(false))
-  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)))
+  toggle.addEventListener("click", () => setOpen(!open));
+  backdrop.addEventListener("click", () => setOpen(false));
+  drawer
+    .querySelectorAll("a")
+    .forEach((a) => a.addEventListener("click", () => setOpen(false)));
+
 </script>

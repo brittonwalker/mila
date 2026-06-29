@@ -1,0 +1,52 @@
+---
+import WorkItemMeta from "./WorkItemMeta.astro";
+
+const {
+  title,
+  description = "UNICEF is the world’s largest humanitarian organization with a presence in 190 countries. Its effectiveness on the ground is built on awareness of the organization and trust in its expertise from communities and governments. ",
+  role = "director",
+  collaborators = "UNICEF x Ipsos",
+  year = 2026,
+  hideBorder = false,
+} = Astro.props;
+
+const meta = [
+  { label: "role", value: role },
+  { label: "collaborators", value: collaborators },
+  { label: "year", value: year },
+];
+---
+
+{!hideBorder && <div class="border-l border-brand py-10" />}
+<div class="group">
+  <a href={`/selected-work/${Astro.props.slug}`} class="block">
+    <div class="flex items-center">
+      <div class="w-6 h-6 shrink-0">
+        <div
+          class="bg-brand w-6 h-6 shrink-0 scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 group-hover:rotate-180 transition-all duration-100 ease-out group-hover:duration-500"
+        >
+        </div>
+      </div>
+      <h3
+        class="-translate-x-6 group-hover:translate-x-4 transition-transform ease-out duration-500 heading-3"
+      >
+        {title}
+      </h3>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-12 gap-5 mt-6">
+      <div class="col-span-2 lg:col-span-5">
+        <p class="body-1 mt-1 text-semantic-secondary uppercase">Info</p>
+        {description && <p class="body-1 mt-1">{description}</p>}
+      </div>
+      {
+        meta.map(({ label, value }, i) => (
+          <WorkItemMeta
+            label={label}
+            value={value}
+            class={i === 0 ? "lg:col-start-7 col-span-2" : "col-span-2"}
+          />
+        ))
+      }
+    </div>
+  </a>
+</div>

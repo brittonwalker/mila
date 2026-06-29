@@ -1,9 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import HeroBlock from '../components/blocks/HeroBlock.astro'
-import SelectedWorksBlock from '../components/blocks/SelectedWorksBlock.astro'
-import Intro from '../components/Intro.astro'
-import { client } from '../lib/sanity'
+import Layout from "../layouts/Layout.astro";
+import WorkListBlock from "../components/blocks/WorkListBlock.astro";
+import Intro from "../components/Intro.astro";
+import CalloutText from "../components/CalloutText.astro";
+import HomeHero from "../components/HomeHero.astro";
+import Expertise from "../components/Expertise.astro";
+import { client } from "../lib/sanity";
 
 const homepage = await client.fetch(`*[_type == "homepage"][0]{
   "title": seo.title,
@@ -16,25 +18,31 @@ const homepage = await client.fetch(`*[_type == "homepage"][0]{
     works[]->{
       _id,
       title,
+      description,
+      role,
+      collaborators,
+      year,
       "slug": slug.current,
       "coverImage": coverImage.asset->{ url, metadata { dimensions } }
     }
   }
-}`)
+}`);
 
-const { title, blocks } = homepage ?? {}
+const { title, blocks } = homepage ?? {};
 ---
 
-<Layout title={title ?? 'Mila Linares'}>
+<Layout title={title ?? "Mila Linares"}>
   <Intro />
   <main>
-    {blocks?.map((block: any) => {
-      if (block._type === 'heroBlock') {
-        return <HeroBlock {...block} />
-      }
-      if (block._type === 'selectedWorksBlock') {
-        return <SelectedWorksBlock {...block} />
-      }
-    })}
+    <HomeHero />
+    {
+      blocks?.map((block: any) => {
+        if (block._type === "selectedWorksBlock") {
+          return <WorkListBlock {...block} />;
+        }
+      })
+    }
+    <CalloutText />
+    <Expertise />
   </main>
 </Layout>

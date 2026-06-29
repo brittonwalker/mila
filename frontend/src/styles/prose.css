@@ -11,14 +11,14 @@
   }
 
   h2 {
-    font-size: var(--font-size-heading-1);
+    font-size: var(--font-size-heading-2);
     font-weight: var(--font-weight-ultralight);
     line-height: var(--font-leading-tight);
     letter-spacing: var(--font-tracking-tight);
   }
 
   h3 {
-    font-size: var(--font-size-heading-2);
+    font-size: var(--font-size-heading-3);
     font-weight: var(--font-weight-ultralight);
     line-height: var(--font-leading-tight);
     letter-spacing: var(--font-tracking-tight);
@@ -91,21 +91,21 @@
     max-width: var(--width-max);
   }
 
-  [data-component='code'] {
+  [data-component="code"] {
     margin-top: 3rem;
   }
 
-  [data-component='image'] {
+  [data-component="image"] {
     margin-top: 10rem;
   }
 
-  [data-component='gallery'] {
+  [data-component="gallery"] {
     width: 100%;
     max-width: 100%;
     margin-top: 4rem;
   }
 
-  [data-component='video'] {
+  [data-component="video"] {
     width: 100%;
     max-width: var(--article-width);
     margin-top: 10rem;

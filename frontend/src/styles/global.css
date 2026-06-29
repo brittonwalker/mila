@@ -1,13 +1,23 @@
-@import 'tailwindcss';
-@import './fonts';
-@import './tokens';
-@import './prose';
+@import "tailwindcss";
+@import "./fonts";
+@import "./tokens";
+@import "./prose";
 
 body {
-  font-family: 'PP Editorial New', sans-serif;
+  font-family: var(--font-neue-montreal);
+  font-size: var(--font-size-body-1);
+  line-height: var(--font-leading-snug);
+  background-color: #e5eaf6;
+  color: #002fa7;
 }
 
 @layer components {
+  .display-1 {
+    font-size: var(--font-size-display-1);
+    font-weight: 500;
+    line-height: 90%;
+  }
+
   .display {
     font-size: var(--font-size-display);
     font-weight: var(--font-weight-ultralight);
@@ -25,7 +35,7 @@ body {
   .heading-2 {
     font-size: var(--font-size-heading-2);
     font-weight: var(--font-weight-ultralight);
-    line-height: var(--font-leading-tight);
+    line-height: var(--font-leading-snug);
     letter-spacing: var(--font-tracking-tight);
   }
 
@@ -43,10 +53,17 @@ body {
     letter-spacing: var(--font-tracking-normal);
   }
 
+  .heading-5 {
+    font-size: var(--font-size-heading-5);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--font-leading-normal);
+    letter-spacing: var(--font-tracking-normal);
+  }
+
   .body-1 {
     font-size: var(--font-size-body-1);
     font-weight: var(--font-weight-regular);
-    line-height: var(--font-leading-relaxed);
+    line-height: var(--font-leading-snug);
     letter-spacing: var(--font-tracking-normal);
   }
 
@@ -96,4 +113,8 @@ body {
   width: calc(100% - 2rem);
   margin-left: auto;
   margin-right: auto;
+
+  @media (min-width: 1280px) {
+    width: calc(100% - 4rem);
+  }
 }

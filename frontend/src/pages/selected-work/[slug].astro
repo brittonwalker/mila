@@ -1,16 +1,19 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import PortableText from '../../components/PortableText.astro'
-import { client } from '../../lib/sanity'
+import Layout from "../../layouts/Layout.astro";
+import PortableText from "../../components/PortableText.astro";
+import { client } from "../../lib/sanity";
 
 export async function getStaticPaths() {
-  const works = await client.fetch(`*[_type == "work" && defined(slug.current)]{ "slug": slug.current }`)
-  return works.map(({ slug }: { slug: string }) => ({ params: { slug } }))
+  const works = await client.fetch(
+    `*[_type == "work" && defined(slug.current)]{ "slug": slug.current }`,
+  );
+  return works.map(({ slug }: { slug: string }) => ({ params: { slug } }));
 }
 
-const { slug } = Astro.params
+const { slug } = Astro.params;
 
-const work = await client.fetch(`*[_type == "work" && slug.current == $slug][0]{
+const work = await client.fetch(
+  `*[_type == "work" && slug.current == $slug][0]{
   title,
   "seoTitle": seo.title,
   credits[]{role, names},
@@ -29,63 +32,76 @@ const work = await client.fetch(`*[_type == "work" && slug.current == $slug][0]{
       caption
     }
   }
-}`, { slug })
+}`,
+  { slug },
+);
 
-if (!work) return Astro.redirect('/selected-work')
+if (!work) return Astro.redirect("/selected-work");
 ---
 
 <Layout title={work.seoTitle ?? work.title}>
   <main class="pt-40 pb-20 mx-auto">
-    <div class="lg:grid grid-cols-12 border-b border-brand pb-10 mb-16">
-      <div class="col-span-7">
-        <h1 class="display">{work.title}</h1>
+    <div class="lg:grid grid-cols-12 gap-5 border-b border-brand pb-8">
+      <div class="col-span-10">
+        <h1 class="heading-1">{work.title}</h1>
       </div>
     </div>
 
-    <div class="lg:grid grid-cols-12 gap-8 body-1">
-      <div class="col-span-3">
-        {work.credits?.length > 0 && (
-          <dl class="flex flex-col gap-4 mb-8">
-            {work.credits.map(({ role, names }: { role: string; names: string }) => (
-              <div class="">
-                <dt class="shrink-0">{role}:</dt>
-                <dd class="text-[var(--color-semantic-text-muted)] ">{names}</dd>
-              </div>
-            ))}
-          </dl>
-        )}
+    <div class="lg:grid grid-cols-12 gap-5 body-1 pt-8">
+      <div class="col-span-4">
+        {
+          work.credits?.length > 0 && (
+            <dl class="grid grid-cols-2 gap-4 lg:gap-x-5 mb-8">
+              {work.credits.map(
+                ({ role, names }: { role: string; names: string }) => (
+                  <div class="">
+                    <dt class="shrink-0 body-1 mt-1 text-semantic-secondary uppercase">
+                      {role}
+                    </dt>
+                    <dd class="mt-1">{names}</dd>
+                  </div>
+                ),
+              )}
+            </dl>
+          )
+        }
       </div>
-      <div class="col-span-9">
-        <div class="max-w-[960px]">
-          {work.content?.some((b: any) => b._type === 'block') && (
-            <PortableText value={work.content.filter((b: any) => b._type === 'block')} layout={false} normalClass='body-1' />
-          )}
+      <div class="col-span-7 lg:col-start-6">
+        <div class="max-w-[760px]">
+          {
+            work.content?.some((b: any) => b._type === "block") && (
+              <PortableText
+                value={work.content.filter((b: any) => b._type === "block")}
+                layout={false}
+                normalClass="body-1"
+              />
+            )
+          }
         </div>
+        {
+          work.projectImages?.length > 0 && (
+            <div class="flex flex-col gap-16 mt-16">
+              {work.projectImages.map((img: any) => (
+                <figure>
+                  <img
+                    src={img.url}
+                    alt={img.alt ?? ""}
+                    class="w-full"
+                    width={img.dimensions?.width}
+                    height={img.dimensions?.height}
+                  />
+                  {img.caption && (
+                    <figcaption class="body-2 text-[var(--color-semantic-text-muted)] mt-3">
+                      {img.caption}
+                    </figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
+          )
+        }
       </div>
-      <div class="col-span-12">
-        {work.projectImages?.length > 0 && (
-          <div class="flex flex-col gap-4 mb-16">
-            {work.projectImages.map((img: any) => (
-              <figure>
-                <img
-                  src={img.url}
-                  alt={img.alt ?? ''}
-                  class="w-full"
-                  width={img.dimensions?.width}
-                  height={img.dimensions?.height}
-                />
-                {img.caption && (
-                  <figcaption class="body-2 text-[var(--color-semantic-text-muted)] mt-3">
-                    {img.caption}
-                  </figcaption>
-                )}
-              </figure>
-            ))}
-          </div>
-        )}
-      </div>
-
+      <div class="col-span-12"></div>
     </div>
-
   </main>
 </Layout>

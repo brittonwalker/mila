@@ -31,6 +31,25 @@ export const work = defineType({
       group: 'content',
     }),
     defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      rows: 3,
+      group: 'content',
+    }),
+    defineField({
+      name: 'collaborators',
+      title: 'Collaborators',
+      type: 'string',
+      group: 'content',
+    }),
+    defineField({
+      name: 'year',
+      title: 'Year',
+      type: 'number',
+      group: 'content',
+    }),
+    defineField({
       name: 'coverImage',
       title: 'Cover Image',
       type: 'image',

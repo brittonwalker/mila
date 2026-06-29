@@ -1,0 +1,17 @@
+---
+
+---
+
+<div class="grid-overlay relative pointer-events-none z-50">
+  <div class="grid fixed inset-0 w-full h-full opacity-20">
+    <div class="grid-container container">
+      <div class="grid-x grid-margin-x grid grid-cols-12 gap-5 h-full">
+        {
+          Array.from({ length: 12 }).map((_, i) => (
+            <div class="cell h-dvh border border-l border-r border-dashed" />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>
