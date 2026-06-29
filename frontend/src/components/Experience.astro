@@ -1,0 +1,80 @@
+---
+import Eyebrow from "./Eyebrow.astro";
+
+const experience = [
+  {
+    company: "UNICEF Global Communications and Advocacy, New York",
+    period: "2020–present",
+    roles: [
+      "Chief of Brand, member of the leadership team, 2023–present",
+      "Head of Brand Development, 2020–2023",
+    ],
+  },
+  {
+    company: "Independent Brand Strategy Practice, New York",
+    period: "2019–2020",
+    roles: ["IDEO, Athletics"],
+  },
+  {
+    company: "Wolff Olins, New York",
+    period: "2016–2018",
+    roles: [
+      "Senior Strategy Director, Strategy Team Coach, member of the leadership team",
+    ],
+  },
+  {
+    company: "American Express, New York",
+    period: "2011–2016",
+    roles: ["Senior Manager Brand and Insights"],
+  },
+  {
+    company: "Saffron Brand Consultants, New York / Madrid",
+    period: "2007–2011",
+    roles: ["Senior Brand Strategist"],
+  },
+  {
+    company: "eBay, Madrid",
+    period: "2006–2007",
+    roles: ["Consumer Insights Manager"],
+  },
+  {
+    company: "Philips, Eindhoven",
+    period: "2003–2006",
+    roles: ["Consumer Insights Manager"],
+  },
+  {
+    company: "Telefonica, Madrid",
+    period: "1999–2002",
+    roles: ["Corporate Development, Project Lead"],
+  },
+  {
+    company: "Accenture, Madrid",
+    period: "1998–1999",
+    roles: ["Strategy Consultant"],
+  },
+];
+---
+
+<section class="">
+  <div class="grid lg:grid-cols-12 gap-5 pt-40">
+    <div class="col-span-5 lg:col-start-5">
+      <Eyebrow>Selected Experience</Eyebrow>
+      <dl class="pt-4 flex flex-col gap-5">
+        {
+          experience.map(({ company, period, roles }) => (
+            <div class="">
+              <dt class="col-span-7 body-1">
+                <span class="font-medium">{company}</span>, {period}
+              </dt>
+              <dd class="col-span-5 body-1">
+                {roles.map((role) => (
+                  <p>{role}</p>
+                ))}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>

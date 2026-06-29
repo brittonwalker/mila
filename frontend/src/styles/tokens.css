@@ -29,13 +29,13 @@
   --font-size-base: 1rem;
   --font-size-display: 5rem;
   --font-size-display-1: clamp(1.125rem, 12.5vw, 180px);
-  --font-size-heading-1: clamp(1.125rem, 6.667vw, 96px);
-  --font-size-heading-2: clamp(1.125rem, 3.333vw, 3rem);
-  --font-size-heading-3: clamp(1.125rem, 2.5vw, 2.25rem);
+  --font-size-heading-1: clamp(2.25rem, 6.667vw, 6rem);
+  --font-size-heading-2: clamp(2rem, 3.333vw, 3rem);
+  --font-size-heading-3: clamp(1.5rem, 2.5vw, 2.25rem);
   --font-size-heading-4: 1.125rem;
   --font-size-heading-5: 1.5rem;
   --font-size-body-1: 1rem;
-  --font-size-body-2: clamp(1.125rem, 1.75vw, 2.125rem);
+  --font-size-body-2: clamp(1.25rem, 1.389vw, 1.5rem);
   --font-size-label: 1.125rem;
   --font-weight-ultralight: 200;
   --font-weight-thin: 300;

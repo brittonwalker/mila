@@ -1,6 +1,7 @@
 ---
 import Eyebrow from "../Eyebrow.astro";
 import WorkItem from "../WorkItem/WorkItem.astro";
+import ArrowButton from "../ArrowButton.astro";
 
 interface Work {
   title: string;
@@ -18,7 +19,9 @@ const { works = [] } = Astro.props;
 ---
 
 <section class="pt-24 lg:pt-20 flex flex-col gap-4">
-  <div class="pl-4 pt-5 pb-20 border-l border-t border-brand rounded-tl-2xl">
+  <div
+    class="pl-4 pt-5 pb-10 lg:pb-20 border-l border-t border-brand rounded-tl-2xl"
+  >
     <Eyebrow>Selected Work</Eyebrow>
   </div>
   {works.map((item, i) => <WorkItem {...item} hideBorder={i === 0} />)}

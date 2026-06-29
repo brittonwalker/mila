@@ -70,7 +70,7 @@ body {
   .body-2 {
     font-size: var(--font-size-body-2);
     font-weight: var(--font-weight-regular);
-    line-height: var(--font-leading-relaxed);
+    line-height: var(--font-leading-normal);
     letter-spacing: var(--font-tracking-normal);
   }
 
