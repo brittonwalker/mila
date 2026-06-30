@@ -108,37 +108,41 @@ const links = nav?.links ?? [];
 </div>
 
 <script>
-  const toggle = document.getElementById("menu-toggle") as HTMLElement;
-  const drawer = document.getElementById("nav-drawer") as HTMLElement;
-  const backdrop = document.getElementById("nav-backdrop") as HTMLElement;
-  const mobileNav = document.getElementById("mobile-nav") as HTMLElement;
-  const bars = toggle.querySelectorAll<HTMLElement>(".menu-bar");
+  const initMenu = () => {
+    const toggle = document.getElementById("menu-toggle") as HTMLElement;
+    const drawer = document.getElementById("nav-drawer") as HTMLElement;
+    const backdrop = document.getElementById("nav-backdrop") as HTMLElement;
+    const mobileNav = document.getElementById("mobile-nav") as HTMLElement;
+    if (!toggle) return;
 
-  let open = false;
+    const bars = toggle.querySelectorAll<HTMLElement>(".menu-bar");
+    let open = false;
 
-  const setOpen = (value: boolean) => {
-    open = value;
-    toggle.setAttribute("aria-expanded", String(open));
+    const setOpen = (value: boolean) => {
+      open = value;
+      toggle.setAttribute("aria-expanded", String(open));
 
-    if (open) {
-      mobileNav.style.pointerEvents = "all";
-      backdrop.style.opacity = "1";
-      drawer.style.transform = "translateX(0)";
-      bars[0].style.transform = "translateY(4px) rotate(45deg)";
-      bars[1].style.transform = "translateY(-4px) rotate(-45deg)";
-    } else {
-      mobileNav.style.pointerEvents = "none";
-      backdrop.style.opacity = "0";
-      drawer.style.transform = "translateX(-100%)";
-      bars[0].style.transform = "";
-      bars[1].style.transform = "";
-    }
+      if (open) {
+        mobileNav.style.pointerEvents = "all";
+        backdrop.style.opacity = "1";
+        drawer.style.transform = "translateX(0)";
+        bars[0].style.transform = "translateY(4px) rotate(45deg)";
+        bars[1].style.transform = "translateY(-4px) rotate(-45deg)";
+      } else {
+        mobileNav.style.pointerEvents = "none";
+        backdrop.style.opacity = "0";
+        drawer.style.transform = "translateX(-100%)";
+        bars[0].style.transform = "";
+        bars[1].style.transform = "";
+      }
+    };
+
+    toggle.addEventListener("click", () => setOpen(!open));
+    backdrop.addEventListener("click", () => setOpen(false));
+    drawer
+      .querySelectorAll("a")
+      .forEach((a) => a.addEventListener("click", () => setOpen(false)));
   };
 
-  toggle.addEventListener("click", () => setOpen(!open));
-  backdrop.addEventListener("click", () => setOpen(false));
-  drawer
-    .querySelectorAll("a")
-    .forEach((a) => a.addEventListener("click", () => setOpen(false)));
-
+  document.addEventListener("astro:page-load", initMenu);
 </script>

@@ -86,6 +86,10 @@ const { title } = Astro.props;
     }
     requestAnimationFrame(raf);
 
+    document.addEventListener("astro:after-swap", () => {
+      lenis.scrollTo(0, { immediate: true });
+    });
+
     const applyGrid = () => {
       const gridToggle = document.getElementById("grid-toggle") as HTMLElement;
       const gridOverlay = document.querySelector(".grid-overlay") as HTMLElement;
