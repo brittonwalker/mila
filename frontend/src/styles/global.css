@@ -11,6 +11,11 @@ body {
   color: var(--color-brand);
 }
 
+::selection {
+  background-color: var(--color-brand);
+  color: var(--color-semantic-background);
+}
+
 @layer components {
   .display-1 {
     font-size: var(--font-size-display-1);

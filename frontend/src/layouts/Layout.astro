@@ -29,16 +29,13 @@ const { title } = Astro.props;
     </script>
   </head>
   <body>
-    <div
-      id="page-content"
-      class="relative z-10 bg-(--color-semantic-background)"
-    >
+    <GridOverlay />
+    <div id="page-content" class="relative">
       <Header />
       <div class="container">
         <slot />
       </div>
     </div>
-    <GridOverlay />
     <Footer />
   </body><script>
     import Lenis from "lenis";
@@ -92,9 +89,13 @@ const { title } = Astro.props;
 
     const applyGrid = () => {
       const gridToggle = document.getElementById("grid-toggle") as HTMLElement;
-      const gridOverlay = document.querySelector(".grid-overlay") as HTMLElement;
+      const gridOverlay = document.querySelector(
+        ".grid-overlay",
+      ) as HTMLElement;
       const iconEye = document.getElementById("grid-icon-eye") as HTMLElement;
-      const iconEyeClosed = document.getElementById("grid-icon-eye-closed") as HTMLElement;
+      const iconEyeClosed = document.getElementById(
+        "grid-icon-eye-closed",
+      ) as HTMLElement;
       if (!gridToggle) return;
 
       const gridVisible = localStorage.getItem("grid-overlay") === "true";
@@ -103,11 +104,15 @@ const { title } = Astro.props;
       iconEyeClosed.classList.toggle("hidden", gridVisible);
       gridToggle.setAttribute("aria-pressed", String(gridVisible));
 
-      gridToggle.addEventListener("click", () => {
-        const current = localStorage.getItem("grid-overlay") === "true";
-        localStorage.setItem("grid-overlay", String(!current));
-        applyGrid();
-      }, { once: true });
+      gridToggle.addEventListener(
+        "click",
+        () => {
+          const current = localStorage.getItem("grid-overlay") === "true";
+          localStorage.setItem("grid-overlay", String(!current));
+          applyGrid();
+        },
+        { once: true },
+      );
     };
 
     document.addEventListener("astro:page-load", applyGrid);
