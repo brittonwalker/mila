@@ -7,8 +7,8 @@ body {
   font-family: var(--font-neue-montreal);
   font-size: var(--font-size-body-1);
   line-height: var(--font-leading-snug);
-  background-color: #e5eaf6;
-  color: #002fa7;
+  background-color: var(--color-semantic-background);
+  color: var(--color-brand);
 }
 
 @layer components {

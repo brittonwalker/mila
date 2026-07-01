@@ -1,5 +1,5 @@
 ---
-import { ArrowRight } from "@lucide/astro";
+import { ArrowRight, ArrowUpRight } from "@lucide/astro";
 
 const { href, label } = Astro.props;
 ---
@@ -12,7 +12,7 @@ const { href, label } = Astro.props;
     <div
       class="absolute top-1/2 -translate-y-1/2 left-0.5 aspect-square flex items-center justify-center rounded-full bg-semantic-background text-brand w-10 p-[10px] group-hover:scale-0 transition-transform duration-300 ease-out"
     >
-        <ArrowRight size={20} aria-hidden="true" />
+      <ArrowRight size={20} aria-hidden="true" />
     </div>
     <span
       class="pl-10 pr-2 group-hover:pl-2 group-hover:pr-10 transition-[padding] duration-300 ease-out"
@@ -21,7 +21,7 @@ const { href, label } = Astro.props;
     <div
       class="absolute top-1/2 -translate-y-1/2 right-0.5 aspect-square flex items-center justify-center rounded-full bg-semantic-background text-brand w-10 p-[10px] scale-0 group-hover:scale-100 transition-transform duration-300 ease-out"
     >
-      <ArrowRight size={20} aria-hidden="true" />
+      <ArrowUpRight size={20} aria-hidden="true" />
     </div>
   </a>
 </div>

@@ -1,4 +1,5 @@
 ---
+import Eyebrow from "./Eyebrow.astro";
 import ArrowButton from "./ArrowButton.astro";
 
 const year = new Date().getFullYear();
@@ -20,49 +21,42 @@ const socials = [
     >
       Let's work together.
     </p>
+    <ArrowButton href="mailto:linares.milagro@gmail.com" label="Say Hi" />
 
     <div
       class="mb-8 lg:mt-32 border-t border-brand pt-8 grid lg:grid-cols-12 text-brand gap-5"
     >
       <div class="col-span-3">
-        <p class="heading-5">Contact</p>
+        <Eyebrow>Contact</Eyebrow>
       </div>
 
-      <div class="col-span-5">
-        <p class="heading-5">
-          If you would like to discuss a project or just say hi, I’d love to
-          speak with you.
-        </p>
-        <ArrowButton href="#" label="Let's Talk" />
+      <div class="col-span-2">
+        <div class="grid grid-cols-2 gap-5">
+          <p>Mail</p>
+          <p>
+            <a href="mailto:linares.milagro@gmail.com"
+              >linares.milagro@gmail.com</a
+            >
+          </p>
+          <p>LinkedIn</p>
+          <p>
+            <a
+              href="https://www.linkedin.com/in/mila-linares-83354013/"
+              class="inline-flex gap-2"
+              target="_blank"><span>Mila_Linares</span> <span>&#8599;</span></a
+            >
+          </p>
+        </div>
       </div>
     </div>
 
     <div
-      class="flex flex-col lg:flex-row justify-between border-t border-brand pt-6 label gap-8"
+      class="flex flex-col lg:flex-row justify-between border-brand pt-40 label gap-8"
     >
       <p class="order-last lg:order-[unset]">© {year} Mila Linares</p>
-
-      <ul
-        class="order-first lg:order-[unset] flex flex-col lg:flex-row gap-2 lg:gap-8"
-      >
-        {
-          socials.map(({ label, href }) => (
-            <li>
-              <a href={href} class="hover:opacity-60 transition-opacity">
-                {label}
-              </a>
-            </li>
-          ))
-        }
-        <li>
-          <a
-            href="mailto:hello@milalinares.com"
-            class="hover:opacity-60 transition-opacity"
-          >
-            hello@milalinares.com
-          </a>
-        </li>
-      </ul>
+      <p class="order-last lg:order-[unset]">
+        Site by <a href="https://brittonwalker.site/" target="_blank">BW</a>
+      </p>
     </div>
   </div>
 </footer>
