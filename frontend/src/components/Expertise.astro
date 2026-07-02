@@ -3,18 +3,23 @@ import Eyebrow from "./Eyebrow.astro";
 
 const expertise = [
   "Brand Architecture",
-  "Visual Expression",
-  "Brand Narrative",
-  "Brand Strategy",
-  "Integrated Brand Campaigns",
   "Brand Health Tracking",
+  "Brand Governance",
+  "Brand Narrative",
+  "Creative Development",
+  "Integrated Brand Campaigns",
+  "Mentoring & Team development",
+  "Messaging hierarchy",
+  "Naming",
+  "Visual Expression",
+  "Quantitative & Qualitative research",
 ];
 ---
 
 <section class="">
   <div class="grid lg:grid-cols-12 gap-5 pt-20 lg:pt-40">
     <div class="lg:col-span-5">
-      <Eyebrow>Selected Expertise</Eyebrow>
+      <Eyebrow>Expertise</Eyebrow>
       <ul class="heading-3 pt-4">
         {expertise.map((item) => <li>{item}</li>)}
       </ul>
