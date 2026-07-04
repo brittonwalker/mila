@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PortableText from "../components/PortableText.astro";
 import Experience from "../components/Experience.astro";
 import { client } from "../lib/sanity";
 
@@ -74,22 +73,8 @@ const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{
             </p>
           </div>
         </div>
+        <Experience />
       </div>
     </div>
-    <Experience />
-    <!-- <div class="grid grid-cols-8 gap-4 mt-40">
-      <div class="col-span-3">
-        {about?.heading && <h2 class="body-2 mb-8 leading-[150%]">Curiculum Verite</h2>}
-      </div>
-      <div class="col-span-5">
-        {about?.content?.length > 0 && (
-          <div>
-            {about.content?.some((b: any) => b._type === 'block') && (
-              <PortableText value={about.content.filter((b: any) => b._type === 'block')} layout={false} normalClass='body-1' />
-            )}
-          </div>
-        )}
-      </div>
-    </div> -->
   </main>
 </Layout>

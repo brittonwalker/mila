@@ -1,14 +1,11 @@
 ---
 import Eyebrow from "./Eyebrow.astro";
 import ArrowButton from "./ArrowButton.astro";
+import Cat from "./svg/cat.svg?raw";
+import Cat2 from "./svg/cat2.svg?raw";
+import Cat3 from "./svg/cat3.svg?raw";
 
 const year = new Date().getFullYear();
-
-const socials = [
-  { label: "Instagram", href: "#" },
-  { label: "LinkedIn", href: "#" },
-  { label: "Twitter", href: "#" },
-];
 ---
 
 <footer
@@ -24,8 +21,14 @@ const socials = [
     <ArrowButton href="mailto:linares.milagro@gmail.com" label="Say Hi" />
 
     <div
-      class="mb-8 mt-6 lg:mt-32 border-t border-brand pt-8 grid lg:grid-cols-12 text-brand gap-5"
+      class="mb-8 mt-6 lg:mt-52 border-t border-brand pt-8 grid lg:grid-cols-12 text-brand gap-5 relative"
     >
+      <div class="w-[160px] absolute right-[10%] top-[-160px]">
+        <Fragment set:html={Cat2} />
+      </div>
+      <div class="w-[190px] absolute right-[25%] top-[-166px]">
+        <Fragment set:html={Cat3} />
+      </div>
       <div class="lg:col-span-3">
         <Eyebrow>Contact</Eyebrow>
       </div>
@@ -49,7 +52,6 @@ const socials = [
         </div>
       </div>
     </div>
-
     <div
       class="flex flex-col lg:flex-row justify-between border-brand pt-40 label gap-8"
     >

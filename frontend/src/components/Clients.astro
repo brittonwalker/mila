@@ -1,0 +1,45 @@
+---
+import Eyebrow from "./Eyebrow.astro";
+
+const clients = [
+  { vertical: "Consumer Goods", names: ["Belcorp", "Coca-Cola", "Philips"] },
+  {
+    vertical: "Culture",
+    names: ["Canadian Center for Architecture", "The New York Review of Books"],
+  },
+  {
+    vertical: "Financial Services",
+    names: ["American Express", "BBVA", "Fidelity Investments"],
+  },
+  {
+    vertical: "Tech",
+    names: ["eBay", "IBM", "Google", "Grubhub", "Telefonica"],
+  },
+  {
+    vertical: "Non-profit",
+    names: ["Action contre la Faim", "UNICEF", "Thorn", "Wikipedia"],
+  },
+];
+---
+
+<section class="">
+  <div class="grid lg:grid-cols-12 gap-5 pt-20 lg:pt-40">
+    <div class="col-span-7 lg:col-start-6">
+      <Eyebrow>Clients</Eyebrow>
+      <dl class="pt-4">
+        {
+          clients.map(({ vertical, names }) => (
+            <div class="grid grid-cols-2 border-t border-brand py-4">
+              <dt class="body-1 text-semantic-secondary">{vertical}</dt>
+              <dd class="body-1">
+                {names.map((name) => (
+                  <p>{name}</p>
+                ))}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>

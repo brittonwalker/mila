@@ -5,6 +5,7 @@ import Intro from "../components/Intro.astro";
 import CalloutText from "../components/CalloutText.astro";
 import HomeHero from "../components/HomeHero.astro";
 import Expertise from "../components/Expertise.astro";
+import Clients from "../components/Clients.astro";
 import { client } from "../lib/sanity";
 
 const homepage = await client.fetch(`*[_type == "homepage"][0]{
@@ -45,5 +46,6 @@ const { title, blocks } = homepage ?? {};
     }
     <CalloutText />
     <Expertise />
+    <Clients />
   </main>
 </Layout>
