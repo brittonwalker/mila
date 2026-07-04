@@ -4,5 +4,5 @@ const { label, value, class: className = "col-span-2" } = Astro.props;
 
 <div class={className}>
   {label && <p class="body-1 text-semantic-secondary uppercase">{label}</p>}
-  {value && <p class="body-1 mt-1">{value}</p>}
+  {value && String(value).split(", ").map((v) => <p class="body-1 mt-1">{v}</p>)}
 </div>

@@ -8,6 +8,7 @@ const {
   collaborators = "UNICEF x Ipsos",
   year = 2026,
   hideBorder = false,
+  client = "",
 } = Astro.props;
 
 const meta = [
@@ -15,6 +16,8 @@ const meta = [
   { label: "collaborators", value: collaborators },
   { label: "year", value: year },
 ];
+
+console.log("client", client);
 ---
 
 {!hideBorder && <div class="border-l border-brand py-5 lg:py-10" />}
@@ -30,7 +33,7 @@ const meta = [
       <h3
         class="-translate-x-6 group-hover:translate-x-4 transition-transform ease-out duration-500 heading-3"
       >
-        {title}
+        {client}: {title}
       </h3>
     </div>
     <div class="grid grid-cols-2 lg:grid-cols-12 gap-5 mt-6">

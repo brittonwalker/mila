@@ -1,6 +1,14 @@
 ---
 import Eyebrow from "./Eyebrow.astro";
 
+const clients = [
+  { vertical: "Consumer Goods", names: ["Belcorp", "Coca-Cola", "Philips"] },
+  { vertical: "Culture", names: ["Canadian Center for Architecture", "The New York Review of Books"] },
+  { vertical: "Financial Services", names: ["American Express", "BBVA", "Fidelity Investments"] },
+  { vertical: "Tech", names: ["eBay", "IBM", "Google", "Grubhub", "Telefonica"] },
+  { vertical: "Non-profit", names: ["Action contre la Faim", "UNICEF", "Thorn", "Wikipedia"] },
+];
+
 const experience = [
   {
     company: "UNICEF Global Communications and Advocacy, New York",
@@ -9,11 +17,19 @@ const experience = [
       "Chief of Brand, member of the leadership team, 2023–present",
       "Head of Brand Development, 2020–2023",
     ],
+    description: [
+      "Leading on brand strategy and bringing the UNICEF brand to life across 190+ countries.",
+      "Elevating the cause of child rights on the global agenda.",
+    ],
   },
   {
     company: "Independent Brand Strategy Practice, New York",
     period: "2019–2020",
     roles: ["IDEO, Athletics"],
+    description: [
+      "Working with leading design studios in NYC",
+      "Notable clients: American Express, IBM, The New York Review of Books",
+    ],
   },
   {
     company: "Wolff Olins, New York",
@@ -21,16 +37,31 @@ const experience = [
     roles: [
       "Senior Strategy Director, Strategy Team Coach, member of the leadership team",
     ],
+    description: [
+      "Advising leading brands and organizations on brand strategy",
+      "Mentoring a multidisciplinary Strategy team",
+      "Fostering a culture of collective creative excellence",
+      "Notable clients: Canadian Center for Architecture, Google, Fidelity Investments, Thorn, Wikipedia",
+    ],
   },
   {
     company: "American Express, New York",
     period: "2011–2016",
     roles: ["Senior Manager Brand and Insights"],
+    description: [
+      "Building best in class digital experiences and products for underserved audiences",
+      "Broadening the appeal of the American Express brand",
+      "Leading qualitative and quantitative research",
+    ],
   },
   {
     company: "Saffron Brand Consultants, New York / Madrid",
     period: "2007–2011",
     roles: ["Senior Brand Strategist"],
+    description: [
+      "Leading on brand strategy for clients in Europe, U.S. and Latin-America",
+      "Notable clients: Action contre la faim, BBVA, Coca-Cola",
+    ],
   },
   {
     company: "eBay, Madrid",
@@ -58,10 +89,10 @@ const experience = [
 <section class="">
   <div class="grid lg:grid-cols-12 gap-5 pt-20 lg:pt-40">
     <div class="col-span-7 lg:col-start-6">
-      <Eyebrow>Selected Experience</Eyebrow>
-      <dl class="pt-4 flex flex-col gap-5">
+      <Eyebrow>Experience</Eyebrow>
+      <dl class="pt-4 flex flex-col gap-10">
         {
-          experience.map(({ company, period, roles }) => (
+          experience.map(({ company, period, roles, description }) => (
             <div class="">
               <dt class="col-span-7 body-1 mb-1">
                 <span class="font-medium">{company}</span>, {period}
@@ -70,10 +101,37 @@ const experience = [
                 {roles.map((role) => (
                   <p>{role}</p>
                 ))}
+                {description && description.length > 0 && (
+                  <div class="mt-2">
+                    <ul class="list-disc list-inside">
+                      {description.map((desc) => (
+                        <li>{desc}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </dd>
             </div>
           ))
         }
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="">
+  <div class="grid lg:grid-cols-12 gap-5 pt-20 lg:pt-40">
+    <div class="col-span-7 lg:col-start-6">
+      <Eyebrow>Clients</Eyebrow>
+      <dl class="pt-4">
+        {clients.map(({ vertical, names }) => (
+          <div class="grid grid-cols-2 border-t border-brand py-4">
+            <dt class="body-1 text-semantic-secondary">{vertical}</dt>
+            <dd class="body-1">
+              {names.map((name) => <p>{name}</p>)}
+            </dd>
+          </div>
+        ))}
       </dl>
     </div>
   </div>
