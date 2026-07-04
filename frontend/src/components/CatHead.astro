@@ -2,7 +2,7 @@
 
 ---
 
-<div id="cat-head" class="block" style="transform: translateY(100%);">
+<div id="cat-head" class="block transform translate-y-[100%]">
   <svg viewBox="0 0 98 120" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M0.5 119.431H97.3884V0.540527C72.8433 0.540527 66.7071 19.7837 66.7071 29.4052H31.585C31.585 8.25123 10.8617 1.34793 0.5 0.540527V119.431Z"
@@ -48,71 +48,35 @@
     const svg = head.querySelector("svg") as SVGSVGElement;
 
     const { gsap } = await import("gsap");
-    const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-    gsap.registerPlugin(ScrollTrigger);
 
-    const section = head.closest("section");
-
-    // kill only our own trigger if it exists
-    ScrollTrigger.getById("cat-head-trigger")?.kill();
     gsap.killTweensOf(head);
-    gsap.set(head, { yPercent: 100 });
 
-    let bobTween: gsap.core.Tween | null = null;
+    const play = () => {
+      const tl = gsap.timeline();
 
-    const startBob = () => {
-      bobTween = gsap.fromTo(
-        head,
-        { yPercent: -85 },
-        {
-          yPercent: -95,
-          duration: 1,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: -1,
-        },
-      );
-    };
-
-    const popUp = () => {
-      bobTween?.kill();
-      gsap.killTweensOf(head);
-      gsap.to(head, {
+      tl.to(head, {
         yPercent: -85,
         duration: 1,
         delay: 0.2,
         ease: "back.out(1.1)",
-        onComplete: startBob,
+      });
+
+      tl.to(head, {
+        yPercent: -95,
+        duration: 1,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
       });
     };
 
-    const popDown = () => {
-      bobTween?.kill();
-      gsap.killTweensOf(head);
-      gsap.to(head, {
-        yPercent: 100,
-        duration: 0.5,
-        ease: "power2.in",
-      });
-    };
-
-    const setupScrollTrigger = () => {
-      ScrollTrigger.create({
-        id: "cat-head-trigger",
-        trigger: section ?? head,
-        start: "top 90%",
-        end: "bottom 10%",
-        onEnter: popUp,
-        onLeave: popDown,
-        onEnterBack: popUp,
-        onLeaveBack: popDown,
-      });
-    };
-
-    if (document.getElementById("intro")) {
-      window.addEventListener("intro:done", setupScrollTrigger, { once: true });
+    if (
+      !sessionStorage.getItem("intro:seen") &&
+      document.getElementById("intro")
+    ) {
+      window.addEventListener("intro:done", play, { once: true });
     } else {
-      setupScrollTrigger();
+      play();
     }
 
     const getCenter = (el: Element) => {
@@ -177,6 +141,7 @@
   };
 
   document.addEventListener("astro:page-load", () => {
+    console.log("astro:page-load", document.getElementById("cat-head"));
     if (document.getElementById("cat-head")) init();
   });
 </script>
