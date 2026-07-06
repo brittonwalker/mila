@@ -4,13 +4,15 @@ import ArrowButton from "./ArrowButton.astro";
 import Cat from "./svg/cat.svg?raw";
 import Cat2 from "./svg/cat2.svg?raw";
 import Cat3 from "./svg/cat3.svg?raw";
+import Tail from "./svg/tail.svg?raw";
+import CatHead from ".//CatHead.astro";
 
 const year = new Date().getFullYear();
 ---
 
 <footer
   id="site-footer"
-  class="w-full pt-20 lg:pt-40 pb-8 bg-(--color-semantic-background) z-0"
+  class="w-full pt-20 lg:pt-40 bg-(--color-semantic-background) z-0"
 >
   <div class="container">
     <p
@@ -20,15 +22,22 @@ const year = new Date().getFullYear();
     </p>
     <ArrowButton href="mailto:linares.milagro@gmail.com" label="Say Hi" />
 
-    <div
-      class="mb-8 mt-6 lg:mt-52 border-t border-brand pt-8 grid lg:grid-cols-12 text-brand gap-5 relative"
-    >
-      <div class="w-[160px] absolute right-[10%] top-[-160px]">
-        <Fragment set:html={Cat2} />
+    <div class="mt-6 lg:mt-52 flex justify-end items-end gap-5 lg:gap-20">
+      <div class="w-14 lg:w-[160px] relative">
+        <div class="relative z-10">
+          <Fragment set:html={Cat2} />
+        </div>
+        <div class="absolute w-full top-0 z-20">
+          <Fragment set:html={Tail} />
+        </div>
       </div>
-      <div class="w-[190px] absolute right-[25%] top-[-166px]">
+      <div class="w-16 lg:w-[190px] mr-[4%] lg:mr-[8%]">
         <Fragment set:html={Cat3} />
       </div>
+    </div>
+    <div
+      class="mb-8 border-t border-brand pt-8 grid lg:grid-cols-12 text-brand gap-5"
+    >
       <div class="lg:col-span-3">
         <Eyebrow>Contact</Eyebrow>
       </div>
@@ -53,10 +62,15 @@ const year = new Date().getFullYear();
       </div>
     </div>
     <div
-      class="flex flex-col lg:flex-row justify-between border-brand pt-40 label gap-8"
+      class="flex justify-between border-brand pt-8 lg:pt-40 label gap-8 items-end pb-4 lg:pb-0"
     >
-      <p class="order-last lg:order-[unset]">© {year} Mila Linares</p>
-      <p class="order-last lg:order-[unset]">
+      <p class="order-last lg:order-[unset] lg:pb-8 lg:flex-1">
+        © {year} Mila Linares
+      </p>
+      <div class="w-16 md:w-20 overflow-hidden hidden lg:block">
+        <CatHead />
+      </div>
+      <p class="order-last lg:order-[unset] lg:pb-8 lg:flex-1 text-right">
         Site by <a href="https://brittonwalker.site/" target="_blank">BW</a>
       </p>
     </div>

@@ -1,0 +1,16 @@
+<svg viewBox="0 0 276 414" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-3deg); }
+      50% { transform: rotate(0deg); }
+      75% { transform: rotate(-3deg); }
+    }
+    .tail {
+      transform-box: fill-box;
+      transform-origin: top right;
+      animation: wiggle 4s ease-in-out infinite;
+    }
+  </style>
+  <path class="tail" d="M142.558 412.522C30.7478 412.522 1.39611 320.186 0.696607 274.018C0.662684 258.407 1.43826 226.199 4.81193 222.263C9.02901 217.343 23.0861 199.772 36.4402 201.881C47.1235 203.567 53.5429 213.829 55.4171 218.749C50.4678 219.75 40.569 232.205 40.569 274.018C40.569 352.252 108.562 373.489 142.558 374.329C155.653 374.329 159.487 386.64 159.766 392.796C159.766 408.241 148.294 412.382 142.558 412.522Z" fill="currentColor" stroke="currentColor"/>
+</svg>
