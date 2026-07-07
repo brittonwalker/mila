@@ -49,7 +49,7 @@ if (!work) return Astro.redirect("/selected-work");
 ---
 
 <Layout title={work.seoTitle ?? work.title}>
-  <main class="pt-24 lg:pt-40 pb-20 mx-auto">
+  <main class="pt-24 lg:pt-40 pb-10 lg:pb-20 mx-auto">
     <div class="lg:grid grid-cols-12 gap-5 border-b border-brand pb-4 lg:pb-8">
       <div class="col-span-10">
         <h1 class="heading-1">
@@ -96,7 +96,7 @@ if (!work) return Astro.redirect("/selected-work");
         </div>
         {
           work.projectImages?.length > 0 && (
-            <div class="flex flex-col gap-16 mt-16">
+            <div class="flex flex-col gap-8 mt-5 lg:gap-16 lg:mt-16">
               {work.projectImages.map((item: any) => (
                 <figure>
                   {item._type === "muxVideo" ? (
