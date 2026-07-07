@@ -62,7 +62,7 @@ const year = new Date().getFullYear();
       </div>
     </div>
     <div
-      class="flex justify-between border-brand pt-8 lg:pt-40 label gap-8 items-end pb-4 lg:pb-0"
+      class="flex flex-col lg:flex-row lg:justify-between border-brand pt-16 label lg:gap-8 lg:items-end pb-4 lg:pb-0"
     >
       <p class="order-last lg:order-[unset] lg:pb-8 lg:flex-1">
         © {year} Mila Linares
@@ -70,9 +70,12 @@ const year = new Date().getFullYear();
       <div class="w-16 md:w-20 overflow-hidden hidden lg:block">
         <CatHead />
       </div>
-      <p class="order-last lg:order-[unset] lg:pb-8 lg:flex-1 text-right">
-        Site by <a href="https://brittonwalker.site/" target="_blank">BW</a>
-      </p>
+      <div class="lg:pb-8 lg:flex-1 lg:text-right">
+        <p>
+          Site | <a href="https://brittonwalker.site/" target="_blank">BW</a>
+        </p>
+        <p>Illustrations | Erik Yang</p>
+      </div>
     </div>
   </div>
 </footer>
