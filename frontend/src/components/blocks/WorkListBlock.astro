@@ -1,7 +1,6 @@
 ---
 import Eyebrow from "../Eyebrow.astro";
 import WorkItem from "../WorkItem/WorkItem.astro";
-import CatHead from "../CatHead.astro";
 
 interface Work {
   title: string;
@@ -19,16 +18,16 @@ interface Props {
 const { works = [] } = Astro.props;
 ---
 
-<div class="pt-10 lg:pt-0 grid grid-cols-3 gap-5">
+<!-- <div class="pt-10 lg:pt-0 grid grid-cols-3 gap-5">
   <div class="col-start-3">
     <div class="w-16 lg:w-[100px] overflow-hidden relative">
       <CatHead />
     </div>
   </div>
-</div>
+</div> -->
 <section class="flex flex-col gap-4 relative">
   <div
-    class="pl-4 pt-5 pb-10 lg:pb-20 border-l border-t border-brand rounded-tl-2xl"
+    class="pl-4 pt-5 pb-8 lg:pb-20 border-l border-t border-brand rounded-tl-2xl"
   >
     <Eyebrow>Selected Work</Eyebrow>
   </div>
