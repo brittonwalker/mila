@@ -21,7 +21,7 @@ const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{
 ---
 
 <Layout title={about?.seoTitle ?? about?.heading ?? "About"}>
-  <main class="pt-40 mx-auto">
+  <main class="pt-24 lg:pt-40 mx-auto">
     <div class="grid md:grid-cols-12 gap-y-10 gap-5">
       <div class="md:col-span-12">
         <div class="grid md:grid-cols-12 gap-5">
