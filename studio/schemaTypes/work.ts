@@ -110,6 +110,33 @@ export const work = defineType({
             }),
           ],
         },
+        {
+          type: 'object',
+          name: 'muxVideo',
+          title: 'Video',
+          fields: [
+            defineField({
+              name: 'playbackId',
+              title: 'Mux Playback ID',
+              type: 'string',
+            }),
+            defineField({
+              name: 'autoplay',
+              title: 'Autoplay (muted loop)',
+              type: 'boolean',
+              initialValue: false,
+            }),
+            defineField({
+              name: 'caption',
+              title: 'Caption',
+              type: 'string',
+            }),
+          ],
+          preview: {
+            select: {title: 'playbackId'},
+            prepare: ({title}) => ({title: title ? `Video: ${title}` : 'Video (no ID)'}),
+          },
+        },
       ],
       options: {layout: 'grid'},
       group: 'content',

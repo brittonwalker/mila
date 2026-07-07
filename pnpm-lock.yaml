@@ -20,6 +20,9 @@ importers:
       '@lucide/astro':
         specifier: ^1.22.0
         version: 1.22.0(astro@6.3.7(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.62.2)(tsx@4.22.4)(yaml@2.9.0))
+      '@mux/mux-player':
+        specifier: ^3.13.0
+        version: 3.13.0(react@19.2.6)
       '@portabletext/to-html':
         specifier: ^5.0.2
         version: 5.0.2

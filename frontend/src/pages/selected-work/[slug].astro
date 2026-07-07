@@ -19,10 +19,18 @@ const work = await client.fetch(
   credits[]{role, names},
   client,
   projectImages[]{
-    "url": asset->url,
-    "dimensions": asset->metadata.dimensions,
-    alt,
-    caption
+    _type,
+    _type == "image" => {
+      "url": asset->url,
+      "dimensions": asset->metadata.dimensions,
+      alt,
+      caption
+    },
+    _type == "muxVideo" => {
+      playbackId,
+      autoplay,
+      caption
+    }
   },
   content[]{
     ...,
@@ -89,18 +97,29 @@ if (!work) return Astro.redirect("/selected-work");
         {
           work.projectImages?.length > 0 && (
             <div class="flex flex-col gap-16 mt-16">
-              {work.projectImages.map((img: any) => (
+              {work.projectImages.map((item: any) => (
                 <figure>
-                  <img
-                    src={img.url}
-                    alt={img.alt ?? ""}
-                    class="w-full"
-                    width={img.dimensions?.width}
-                    height={img.dimensions?.height}
-                  />
-                  {img.caption && (
+                  {item._type === "muxVideo" ? (
+                    <mux-player
+                      playback-id={item.playbackId}
+                      stream-type="on-demand"
+                      class="w-full aspect-video"
+                      autoplay={item.autoplay ? "muted" : undefined}
+                      loop={item.autoplay || undefined}
+                      muted={item.autoplay || undefined}
+                    />
+                  ) : (
+                    <img
+                      src={item.url}
+                      alt={item.alt ?? ""}
+                      class="w-full"
+                      width={item.dimensions?.width}
+                      height={item.dimensions?.height}
+                    />
+                  )}
+                  {item.caption && (
                     <figcaption class="body-2 text-[var(--color-semantic-text-muted)] mt-3">
-                      {img.caption}
+                      {item.caption}
                     </figcaption>
                   )}
                 </figure>
@@ -109,7 +128,10 @@ if (!work) return Astro.redirect("/selected-work");
           )
         }
       </div>
-      <div class="col-span-12"></div>
     </div>
   </main>
 </Layout>
+
+<script>
+  import "@mux/mux-player";
+</script>
