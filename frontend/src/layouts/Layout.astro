@@ -26,6 +26,12 @@ const { title } = Astro.props;
     <ClientRouter />
     <script is:inline>
       history.scrollRestoration = "manual";
+      if (!sessionStorage.getItem("intro:seen")) {
+        document.documentElement.style.visibility = "hidden";
+      }
+      if (localStorage.getItem("grid-overlay") === "true") {
+        document.documentElement.classList.add("grid-visible");
+      }
     </script>
   </head>
   <body>

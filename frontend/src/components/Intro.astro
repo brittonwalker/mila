@@ -45,10 +45,12 @@
 
   if (!intro || sessionStorage.getItem("intro:seen")) {
     intro?.remove();
+    document.documentElement.style.visibility = "";
     window.dispatchEvent(new Event("intro:reveal"));
     window.dispatchEvent(new Event("intro:done"));
   } else {
     intro.style.display = "";
+    document.documentElement.style.visibility = "";
     const tl = gsap.timeline();
 
     tl.to(".intro-word", {
