@@ -39,7 +39,9 @@ console.log("client", client);
     <div class="grid grid-cols-2 lg:grid-cols-12 gap-5 mt-6">
       <div class="col-span-2 lg:col-span-5">
         <p class="body-1 mt-1 text-semantic-secondary uppercase">Info</p>
-        {description && <p class="body-1 mt-1">{description}</p>}
+        <div class="max-w-[580px]">
+          {description && <p class="body-1 text-pretty">{description}</p>}
+        </div>
       </div>
       {
         meta.map(({ label, value }, i) => (
