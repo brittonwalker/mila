@@ -60,6 +60,13 @@ export const work = defineType({
       title: 'Cover Image',
       type: 'image',
       options: {hotspot: true},
+      fields: [
+        defineField({
+          name: 'caption',
+          title: 'Caption',
+          type: 'string',
+        }),
+      ],
       group: 'content',
     }),
     defineField({

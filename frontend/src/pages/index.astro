@@ -25,7 +25,7 @@ const homepage = await client.fetch(`*[_type == "homepage"][0]{
       year,
       client,
       "slug": slug.current,
-      "coverImage": coverImage.asset->{ url, metadata { dimensions } }
+      "coverImage": coverImage{ "url": asset->url, "dimensions": asset->metadata.dimensions, caption }
     }
   }
 }`);

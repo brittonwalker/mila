@@ -7,7 +7,7 @@ const works = await client.fetch(`*[_type == "work"] | order(_createdAt desc) {
   title,
   "slug": slug.current,
   client,
-  "coverImage": coverImage.asset->{ url, metadata { dimensions } }
+  "coverImage": coverImage{ "url": asset->url, "dimensions": asset->metadata.dimensions, caption }
 }`);
 ---
 
